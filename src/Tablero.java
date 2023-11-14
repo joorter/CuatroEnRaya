@@ -17,32 +17,42 @@ public class Tablero {
 	}
 
 	public void ponerFichaRoja(int columna) {
+		int cont;
 		if (tablero[5][columna] == 0) {
 			tablero[5][columna] = 1;
+			cont=5;
 		} else {
-			int cont = 5;
+			 cont = 5;
 			while ((tablero[cont][columna] != 0) && (cont > 0)) {
 				cont--;
 			}
 			tablero[cont][columna] = 1;
 		}
+		if(ganarojo(cont, columna)) {
+			System.out.println("Enhorabuena has ganado");
+		}
 	}
 
 	public void ponerFichaAmarilla(int columna) {
+		int cont;
 		if (tablero[5][columna] == 0) {
 			tablero[5][columna] = 2;
+			 cont = 5;
 		} else {
-			int cont = 5;
+			 cont = 5;
 			while ((tablero[cont][columna] != 0) && (cont > 0)) {
 				cont--;
 			}
 			tablero[cont][columna] = 2;
 		}
+		if(ganaamarillo(cont, columna)) {
+			System.out.println("Enhorabuena has ganado");
+		}
 	}
 	public boolean ganarojo(int i,int j) {
 		int cont=0;
 		int suma=0;
-		while(cont<7) {
+		while(cont<6) {
 			if(tablero[cont][j]==1) {
 				suma++;
 				if(suma==4) {
@@ -92,7 +102,7 @@ public class Tablero {
 			iaux--;
 			jaux++;
 		}
-		while(iaux>0 && jaux<7) {
+		while(iaux<6 && jaux>0) {
 			if(tablero[iaux][jaux]==1) {
 				suma++;
 				if(suma==4) {
@@ -110,7 +120,7 @@ public class Tablero {
 	public boolean ganaamarillo(int i,int j) {
 		int cont=0;
 		int suma=0;
-		while(cont<7) {
+		while(cont<6) {
 			if(tablero[cont][j]==2) {
 				suma++;
 				if(suma==4) {
