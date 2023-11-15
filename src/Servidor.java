@@ -10,9 +10,9 @@ public class Servidor {
 		// TODO Auto-generated method stub
 		
 		
-			ExecutorService pool = Executors.newCachedThreadPool();
+			ExecutorService pool = Executors.newFixedThreadPool(2);
 			
-			try(ServerSocket socket = new ServerSocket(133)){
+			try(ServerSocket socket = new ServerSocket(233)){
 				
 			while (true) {
 				Socket s=socket.accept();
