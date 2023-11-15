@@ -11,7 +11,7 @@ public class AtenderPeticion implements Runnable {
 private Socket s;
 private static int numeroconexiones=0;
 private boolean rojo;
-CountDownLatch contador = new CountDownLatch(2);
+private static CountDownLatch contador = new CountDownLatch(2);
 
 public AtenderPeticion(Socket s) {
 	this.s=s;
@@ -26,17 +26,26 @@ public AtenderPeticion(Socket s) {
 	public void run() {
 		// TODO Auto-generated method stub
 		
-			System.out.println("Participante encontrado");
-			contador.countDown();
-			try(DataInputStream dis=new DataInputStream(s.getInputStream());
-				DataOutputStream dos=new DataOutputStream(s.getOutputStream())) {
-				dos.writeBoolean(rojo);
-				Random random = new Random();
-		        int empieza = random.nextInt(2);
-		        dos.writeInt(empieza);
-		        
 			
-		} catch (IOException e) {
+			try {
+				System.out.println("Participante encontrado");
+				
+				contador.countDown();
+				contador.await();
+				try(DataInputStream dis=new DataInputStream(s.getInputStream());
+						DataOutputStream dos=new DataOutputStream(s.getOutputStream())) {
+						dos.writeBoolean(rojo);
+						Random random = new Random();
+				        int empieza = random.nextInt(2);
+				        dos.writeInt(empieza);
+				        
+					
+				}
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			 catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
