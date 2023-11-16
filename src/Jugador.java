@@ -15,7 +15,7 @@ public class Jugador {
 	public void setNombre(String Nombre) {
 		this.nombre=Nombre;
 	}
-	public String getNombre(String Nombre) {
+	public String getNombre() {
 		return this.nombre;
 	}
 	public void setEquiporojo(boolean Color) {
