@@ -22,6 +22,7 @@ public class prueba {
 		t.ponerFicha(j1, 1);
 		t.ponerFicha(j1, 0);
 		
+		
 		/*
 		t.ponerFichaRoja(1);
 		t.ponerFichaAmarilla(2);

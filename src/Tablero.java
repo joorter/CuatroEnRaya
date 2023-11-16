@@ -128,6 +128,7 @@ public class Tablero {
 	//Las fichas X son las del jugador del equipo rojo.
 	//Las fichas O son las del otro jugador.
 	{
+		
 		for (int x = 0; x < tablero.length; x++) {
 			for (int y = 0; y < tablero[x].length; y++) {
 				System.out.print("|");

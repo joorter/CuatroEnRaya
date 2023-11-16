@@ -22,7 +22,6 @@ public class Jugador {
 		this.Equiporojo=Color;
 	}
 	public boolean getEquiporojo() {
-		return this.Equiporojo;
+		return this.Equiporojo;		
 	}
-	
 }
