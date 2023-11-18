@@ -1,12 +1,29 @@
+import java.util.List;
+import java.util.ArrayList;
 
 public class prueba {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
+		Logros logro1 = new Logros("Primera victoria", "Gana una partida",1);
+		Logros logro2 = new Logros("Segunda victoria", "Gana dos partidas",2);
+		
+		List<Logros> logrosJugador = new ArrayList<>();
+		logrosJugador.add(logro1);
+		logrosJugador.add(logro2);
+		
 		Tablero t=new Tablero();
-		Jugador j1 = new Jugador("Mario");
-		Jugador j2 = new Jugador("Josean");
+		Jugador j1 = new Jugador("Mario",logrosJugador);
+		Jugador j2 = new Jugador("Josean",logrosJugador);
+		
+		System.out.println("Comprobamos logros:");
+		j1.consultarLogros();
+		
+		
 		j2.setEquiporojo(false);
+		
+		
 		
 		
 		t.mostrarTablero();

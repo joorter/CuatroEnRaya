@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class EjecutarJugador {
 
@@ -16,7 +18,8 @@ public class EjecutarJugador {
 		System.out.println("Introduce el nombre");
 		Scanner sc = new Scanner(System.in);
 		String nombre=sc.next();
-		Jugador j=new Jugador(nombre);
+		List<Logros> logros = new ArrayList<>();
+		Jugador j=new Jugador(nombre,logros);
 		int menu=0;
 		while(menu!=3) {
 			
@@ -67,7 +70,6 @@ public class EjecutarJugador {
 						if(turno) {
 							System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
 							int columna=sc.nextInt();
-							columna=columna-1;
 							t.ponerFicha(j,columna);
 							turno=false;
 							oos.writeObject(t);

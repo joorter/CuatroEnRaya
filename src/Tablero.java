@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.Scanner;
+import java.util.List;
 
 //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
 public class Tablero implements Serializable {
@@ -9,6 +10,7 @@ public class Tablero implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int tablero[][];
 	private boolean finalizado;
+
 	public Tablero()
 	//Constructor del Tablero
 	//Genera un tablero con 6 filas y 7 columnas.
@@ -30,6 +32,7 @@ public class Tablero implements Serializable {
 		return this.finalizado;
 	}
 	public boolean columnaLlena(int col) {
+		col--;
 		if(tablero[0][col] == 1 || tablero[0][col] == 2) {
 			return true;
 		}
@@ -79,6 +82,11 @@ public class Tablero implements Serializable {
 		if(jugadorGana(cont, columna, ficha)) {
 			System.out.println("Enhorabuena, " + j.getNombre() + " has ganado.");
 			finalizado=true;
+			
+			if(!j.haCompletadoLogro("Primera victoria")) {
+				j.actualizarLogro("Primera victoria");
+			}
+			
 		}
 		if(tablerocompleto()) {
 			System.out.println("No se pueden colocar mas fichas partida en empate");
