@@ -47,17 +47,11 @@ public class Tablero implements Serializable {
 			System.out.println("Has seleccionado una columna llena, selecciona otra por favor:");
 			Scanner sc = new Scanner(System.in);
 			columna = sc.nextInt();
-<<<<<<< Upstream, based on branch 'master' of https://github.com/joorter/CuatroEnRaya.git
-			while(columna < 0 || columna >=7) {
-				System.out.println("No has elegido una columna válida.");
-				columna = sc.nextInt();
-=======
 			columna=columna-1;
 			while(columna < 1 || columna >7) {
 				System.out.println("No has elegido una columna válida.");
 				columna = sc.nextInt();
 				columna=columna-1;
->>>>>>> 47ac534 funciona con bugs
 			}
 		}
 	
@@ -164,8 +158,6 @@ public class Tablero implements Serializable {
 		
 		
 	}
-	
-	
 	public boolean tablerocompleto(){
 		int i = 0;
 		int j = 0;
