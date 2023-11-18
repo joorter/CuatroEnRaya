@@ -1,6 +1,8 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Random;
 import java.util.Scanner;
@@ -47,8 +49,17 @@ public class EjecutarJugador {
 					}else {
 						System.out.println("Espera tu turno");
 					}
+					ObjectInputStream ois=new ObjectInputStream(dis);
+					ObjectOutputStream oos=new ObjectOutputStream(dos);
+					Tablero t=(Tablero)ois.readObject();
+					while(!t.getFinalizado()) {
+						
+					}
 					
 				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

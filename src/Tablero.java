@@ -1,11 +1,14 @@
-//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
-public class Tablero {
-	private int tablero[][];
+import java.io.Serializable;
 
+//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
+public class Tablero implements Serializable {
+	private int tablero[][];
+	private boolean finalizado;
 	public Tablero()
 	//Constructor del Tablero
 	//Genera un tablero con 6 filas y 7 columnas.
 	{
+		finalizado=false;
 		this.tablero = new int[6][7];
 		int i = 0;
 		int j = 0;
@@ -18,7 +21,9 @@ public class Tablero {
 			j = 0;
 		}
 	}
-	
+	public boolean getFinalizado() {
+		return this.finalizado;
+	}
 	public void ponerFicha(Jugador j, int columna) {
 		int cont;
 		int ficha;
@@ -41,6 +46,11 @@ public class Tablero {
 		}
 		if(jugadorGana(cont, columna, ficha)) {
 			System.out.println("Enhorabuena, " + j.getNombre() + " has ganado.");
+			finalizado=true;
+		}
+		if(tablerocompleto()) {
+			System.out.println("No se pueden colocar mas fichas partida en empate");
+			finalizado=true;
 		}
 	
 	}
@@ -97,14 +107,13 @@ public class Tablero {
 		}
 		 iaux=i;
 		 jaux=j;
+		 suma=0;
 		
-		while(iaux>0 && jaux<7) {
+		while(iaux>0 && jaux<6) {
 			iaux--;
 			jaux++;
-			System.out.println(iaux);
-			System.out.println(jaux);
 		}
-		while(iaux<6 && jaux>0) {
+		while(iaux<6 && jaux>=0) {
 			if(tablero[iaux][jaux] == jugador) {
 				
 				suma++;
@@ -122,7 +131,21 @@ public class Tablero {
 		
 		
 	}
-	
+	public boolean tablerocompleto(){
+		int i = 0;
+		int j = 0;
+		while (i < 6) {
+			while (j < 7) {
+				if(tablero[i][j]==0) {
+					return false;
+				}
+				j++;
+			}
+			i++;
+			j = 0;
+		}
+		return true;
+	}
 	public void mostrarTablero()
 	//Muestra el estado actual del tablero.
 	//Las fichas X son las del jugador del equipo rojo.
@@ -187,7 +210,7 @@ public class Tablero {
 	}
 	*/
 	
-	
+/*	
 	
 	public boolean ganarojo(int i,int j) {
 		int cont=0;
@@ -220,11 +243,11 @@ public class Tablero {
 		 suma=0;
 		int iaux=i;
 		int jaux=j;
-		while(iaux>0 && jaux>0) {
+		while(iaux>0 || jaux>0) {
 			iaux--;
 			jaux--;
 		}
-		while(iaux<6 && jaux<7) {
+		while(iaux<6 || jaux<7) {
 			if(tablero[iaux][jaux]==1) {
 				suma++;
 				if(suma==4) {

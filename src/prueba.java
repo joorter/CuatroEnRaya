@@ -8,7 +8,8 @@ public class prueba {
 		Jugador j2 = new Jugador("Josean");
 		j2.setEquiporojo(false);
 		
-		t.ponerFicha(j1, 1);
+		
+		t.mostrarTablero();
 		t.ponerFicha(j2, 2);
 		t.ponerFicha(j1, 2);
 		t.ponerFicha(j1, 1);
@@ -22,25 +23,8 @@ public class prueba {
 		t.ponerFicha(j1, 1);
 		t.ponerFicha(j1, 0);
 		
-		
-		/*
-		t.ponerFichaRoja(1);
-		t.ponerFichaAmarilla(2);
-		t.ponerFichaRoja(2);
-		t.ponerFichaRoja(1);
-		t.ponerFichaAmarilla(3);
-		t.ponerFichaAmarilla(3);
-		t.ponerFichaRoja(3);
-		t.ponerFichaAmarilla(4);
-		t.ponerFichaAmarilla(4);
-		t.ponerFichaAmarilla(4);
-		t.ponerFichaRoja(4);
-		t.ponerFichaRoja(1);
-		t.ponerFichaRoja(0);
-		*/
-		System.out.println(t.ganarojo(4, 2));		//System.out.println(t.jugadorGana(4, 2,1));
-		//System.out.println(t.jugadorGana(4, 2,2));
-		//System.out.println(t.ganarojo(4, 2));
+		System.out.println(t.jugadorGana(5, 1,1));
+
 		t.mostrarTablero();
 	}
 
