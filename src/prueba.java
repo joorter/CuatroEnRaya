@@ -22,10 +22,17 @@ public class prueba {
 		t.ponerFicha(j1, 4);
 		t.ponerFicha(j1, 1);
 		t.ponerFicha(j1, 0);
+		t.ponerFicha(j1, 4);
+		t.ponerFicha(j1, 4);t.ponerFicha(j1, 4);
+		
 		
 		System.out.println(t.jugadorGana(5, 1,1));
 
 		t.mostrarTablero();
-	}
+
+		System.out.println(t.columnaLlena(4));
+		System.out.println(t.columnaLlena(5));
+
+		}
 
 }

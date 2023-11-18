@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.Scanner;
 
 //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
 public class Tablero implements Serializable {
@@ -24,9 +25,30 @@ public class Tablero implements Serializable {
 	public boolean getFinalizado() {
 		return this.finalizado;
 	}
+	public boolean columnaLlena(int col) {
+		if(tablero[0][col] == 1 || tablero[0][col] == 2) {
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+	}
+	
 	public void ponerFicha(Jugador j, int columna) {
 		int cont;
 		int ficha;
+		
+		while(columnaLlena(columna)) {
+			System.out.println("Has seleccionado una columna llena, selecciona otra por favor:");
+			Scanner sc = new Scanner(System.in);
+			columna = sc.nextInt();
+			while(columna < 0 || columna >=7) {
+				System.out.println("No has elegido una columna válida.");
+				columna = sc.nextInt();
+			}
+		}
+	
 		if(j.getEquiporojo() == true) {
 			ficha = 1;
 		}else {
@@ -131,6 +153,8 @@ public class Tablero implements Serializable {
 		
 		
 	}
+	
+	
 	public boolean tablerocompleto(){
 		int i = 0;
 		int j = 0;
