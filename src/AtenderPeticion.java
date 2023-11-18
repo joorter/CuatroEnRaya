@@ -15,8 +15,7 @@ public class AtenderPeticion implements Runnable {
 private Socket s;
 private static int numeroconexiones=0;
 private boolean rojo;
-private static CountDownLatch contador = new CountDownLatch(2);
-private static CountDownLatch contadorturno = new CountDownLatch(2);
+private static CountDownLatch contador=new CountDownLatch(2);
 private static Tablero t;
 private static int empieza;
 
@@ -38,6 +37,7 @@ public AtenderPeticion(Socket s) {
 		
 			
 			try {
+				
 				System.out.println("Participante encontrado");
 				
 				contador.countDown();
@@ -48,23 +48,33 @@ public AtenderPeticion(Socket s) {
 						ObjectOutputStream oos=new ObjectOutputStream(s.getOutputStream());
 						) {
 						dos.writeBoolean(rojo);
-				        dos.writeInt(this.empieza);				        		        
-						oos.writeObject(t);
-						boolean turno;
-						while(!t.getFinalizado()) {
-							  contador = new CountDownLatch(2);
-							turno=dis.readBoolean();
-							if(turno) {
-								t=(Tablero)ois.readObject();
-							}		
-							contador.countDown();
-							contador.await();
-							if(!turno) {
-								oos.writeObject(t);
-								dos.flush();
+				        dos.writeInt(AtenderPeticion.empieza);		
+				        	oos.writeObject(t);
+							boolean turno;
+							contador =new CountDownLatch(2);
+							while(!t.getFinalizado()) {
+								
+								turno=dis.readBoolean();
+								if(turno) {
+									t=(Tablero)ois.readObject();
+									t.mostrarTablero();
+								}
+								contador.countDown();
+								contador.await();
+								if(!turno) {
+									System.out.println("Envia objeto");
+									oos.writeObject(t);
+									dos.flush();
+									
+								}else {
+									contador = new CountDownLatch(2);
+								}
+								System.out.println("fin de turno");
+								
+								
 							}
-							
-						}
+				        	
+						
 				        
 					
 				} catch (ClassNotFoundException e) {

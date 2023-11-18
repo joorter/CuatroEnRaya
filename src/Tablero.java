@@ -42,19 +42,23 @@ public class Tablero implements Serializable {
 	public void ponerFicha(Jugador j, int columna) {
 		int cont;
 		int ficha;
-		
-		while(columnaLlena(columna)) {
-			System.out.println("Has seleccionado una columna llena, selecciona otra por favor:");
-			Scanner sc = new Scanner(System.in);
+		Scanner sc= new Scanner(System.in);
+		while(columna < 1 || columna >7) {
+			System.out.println("Has seleccionado una columna erronea, selecciona una entre 1 y 7");
 			columna = sc.nextInt();
-			columna=columna-1;
-			while(columna < 1 || columna >7) {
-				System.out.println("No has elegido una columna válida.");
-				columna = sc.nextInt();
-				columna=columna-1;
-			}
 		}
-	
+			while(columnaLlena(columna)) {
+				System.out.println("Has elegido una columna llena. Introduzca otra");
+				columna = sc.nextInt();
+				if(columna < 1 || columna >7) {
+					while(columna < 1 || columna >7) {
+						System.out.println("Has seleccionado una columna erronea, selecciona una entre 1 y 7");
+						columna = sc.nextInt();
+					}
+			}
+			
+		}
+			columna=columna-1;
 		if(j.getEquiporojo() == true) {
 			ficha = 1;
 		}else {

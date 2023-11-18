@@ -69,15 +69,17 @@ public class EjecutarJugador {
 							int columna=sc.nextInt();
 							columna=columna-1;
 							t.ponerFicha(j,columna);
+							turno=false;
 							oos.writeObject(t);
 							dos.flush();
-							turno=false;
-							
+														
 
 						}else {
 							System.out.println("Espera tu turno");
 							turno=true;
 							t=(Tablero)ois.readObject();
+							
+							
 						}
 						
 						
