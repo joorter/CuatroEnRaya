@@ -1,5 +1,7 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -30,9 +32,13 @@ public class EjecutarJugador {
 				j.setNombre(nombre);
 			}
 			if(menu==2) {
-				try(Socket s=new Socket("localhost",233);
+				try(Socket s=new Socket("localhost",255);
 				DataInputStream dis=new DataInputStream(s.getInputStream());
-				DataOutputStream dos=new DataOutputStream(s.getOutputStream())){
+				DataOutputStream dos=new DataOutputStream(s.getOutputStream());
+
+				ObjectOutputStream oos=new ObjectOutputStream(s.getOutputStream());
+						ObjectInputStream ois=new ObjectInputStream(s.getInputStream());
+						){
 					boolean rojo;
 					rojo=dis.readBoolean();
 					if(!rojo) {
@@ -44,21 +50,49 @@ public class EjecutarJugador {
 						System.out.println("Eres del equipo amarillo, marcaras con O");
 					}
 		            int empezar=dis.readInt();
+		            boolean turno;
 					if((empezar==1 )&&(j.getEquiporojo()) ||((empezar==0 )&&(!j.getEquiporojo()))) {
 						System.out.println("Es tu turno");
+						 turno=true;
 					}else {
 						System.out.println("Espera tu turno");
+						 turno=false;
 					}
-					ObjectInputStream ois=new ObjectInputStream(dis);
-					ObjectOutputStream oos=new ObjectOutputStream(dos);
-					Tablero t=(Tablero)ois.readObject();
+					dos.flush();
+					
+					Tablero t =(Tablero) ois.readObject();
 					while(!t.getFinalizado()) {
+						t.mostrarTablero();
+						dos.writeBoolean(turno);
+						if(turno) {
+							System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
+							int columna=sc.nextInt();
+							columna=columna-1;
+							t.ponerFicha(j,columna);
+							oos.writeObject(t);
+							dos.flush();
+							turno=false;
+							
+
+						}else {
+							System.out.println("Espera tu turno");
+							turno=true;
+							t=(Tablero)ois.readObject();
+						}
+						
 						
 					}
+					if(turno) {
+						System.out.println("Lo siento has perdido");
+					}
+					t.mostrarTablero();
+					oos.close();
+					ois.close();
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				 
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

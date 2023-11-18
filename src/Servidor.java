@@ -12,11 +12,13 @@ public class Servidor {
 		
 			ExecutorService pool = Executors.newFixedThreadPool(2);
 			
-			try(ServerSocket socket = new ServerSocket(233)){
+			try(ServerSocket socket = new ServerSocket(255)){
 				
 			while (true) {
-				Socket s=socket.accept();
+				Socket s=socket.accept();	
 				pool.execute(new AtenderPeticion(s));
+				
+				
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

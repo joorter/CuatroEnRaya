@@ -3,6 +3,10 @@ import java.util.Scanner;
 
 //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
 public class Tablero implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int tablero[][];
 	private boolean finalizado;
 	public Tablero()
@@ -43,9 +47,17 @@ public class Tablero implements Serializable {
 			System.out.println("Has seleccionado una columna llena, selecciona otra por favor:");
 			Scanner sc = new Scanner(System.in);
 			columna = sc.nextInt();
+<<<<<<< Upstream, based on branch 'master' of https://github.com/joorter/CuatroEnRaya.git
 			while(columna < 0 || columna >=7) {
 				System.out.println("No has elegido una columna válida.");
 				columna = sc.nextInt();
+=======
+			columna=columna-1;
+			while(columna < 1 || columna >7) {
+				System.out.println("No has elegido una columna válida.");
+				columna = sc.nextInt();
+				columna=columna-1;
+>>>>>>> 47ac534 funciona con bugs
 			}
 		}
 	
@@ -76,7 +88,6 @@ public class Tablero implements Serializable {
 		}
 	
 	}
-	
 	public boolean jugadorGana(int i, int j, int jugador) {
 		int cont=0;
 		int suma=0;
