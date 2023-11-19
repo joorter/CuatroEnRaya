@@ -79,12 +79,8 @@ public class EjecutarJugador {
 						}else {
 							System.out.println("Espera tu turno");
 							turno=true;
-							t=(Tablero)ois.readObject();
-							
-							
-						}
-						
-						
+							t=(Tablero)ois.readObject();	
+						}	
 					}
 					if(turno) {
 						System.out.println("Lo siento has perdido");

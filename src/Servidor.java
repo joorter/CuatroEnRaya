@@ -15,8 +15,13 @@ public class Servidor {
 			try(ServerSocket socket = new ServerSocket(255)){
 				
 			while (true) {
-				Socket s=socket.accept();	
-				pool.execute(new AtenderPeticion(s));
+				try {
+					Socket s=socket.accept();	
+					pool.execute(new AtenderPeticion(s));
+				}catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 				
 				
 			}

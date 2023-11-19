@@ -13,7 +13,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class AtenderPeticion implements Runnable {
 private Socket s;
-private static int numeroconexiones=0;
+private static int numeroconexiones;
 private boolean rojo;
 private static CountDownLatch contador=new CountDownLatch(2);
 private static Tablero t;
@@ -21,8 +21,10 @@ private static int empieza;
 
 public AtenderPeticion(Socket s) {
 	this.s=s;
+	
 	numeroconexiones++;
-	if(numeroconexiones==1) {
+	
+	if(numeroconexiones%2==1) {
 		rojo=true;
 		t=new Tablero();
 		Random random = new Random();
@@ -37,7 +39,7 @@ public AtenderPeticion(Socket s) {
 		
 			
 			try {
-				
+				t=new Tablero();
 				System.out.println("Participante encontrado");
 				
 				contador.countDown();
@@ -62,7 +64,6 @@ public AtenderPeticion(Socket s) {
 								contador.countDown();
 								contador.await();
 								if(!turno) {
-									System.out.println("Envia objeto");
 									oos.writeObject(t);
 									dos.flush();
 									
