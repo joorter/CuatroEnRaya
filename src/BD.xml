@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listapersonas>
+
+	
+	<persona>
+		<nombre>b</nombre>
+		<victorias>2</victorias>
+	</persona>
+	<persona>
+		<nombre>bfsdsfd</nombre>
+		<victorias>25</victorias>
+	</persona>
+	<persona>
+		<nombre>baas</nombre>
+		<victorias>22</victorias>
+	</persona>
+	<persona>
+		<nombre>a</nombre>
+		<victorias>1</victorias>
+	</persona>
+	<persona>
+		<nombre>a</nombre>
+		<victorias>2</victorias>
+	</persona>
+	<persona>
+		<nombre>a</nombre>
+		<victorias>3</victorias>
+	</persona>
+</listapersonas>

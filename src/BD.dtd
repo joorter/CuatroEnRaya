@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT listapersonas ( persona*)>
+<!ELEMENT persona ( nombre, victorias, logros*)*>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT victorias (#PCDATA)>
+<!ELEMENT logros (#PCDATA)>
