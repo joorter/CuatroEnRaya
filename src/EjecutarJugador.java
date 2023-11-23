@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class EjecutarJugador {
@@ -185,35 +186,16 @@ public class EjecutarJugador {
 						}
 						cont++;
 					}
-
-					Map.Entry<String, Integer>[] ordenaranking = Ranking.entrySet().toArray(new Map.Entry[0]);
-					int x = 0;
-					int y = 0;
-					while (x < ordenaranking.length) {
-						while (y+1 < ordenaranking.length) {
-
-							if (ordenaranking[y].getValue() > ordenaranking[y + 1].getValue()) {
-								Map.Entry<String, Integer> temp = ordenaranking[y];
-								ordenaranking[y] = ordenaranking[y + 1];
-								ordenaranking[y + 1] = temp;
-							}
-							y++;
-						}
-						y=0;
-						x++;
-					}
-					Ranking.clear();
-					for (Map.Entry<String, Integer> entrada : ordenaranking) {
-						Ranking.put(entrada.getKey(), entrada.getValue());
-					}
-					x=0;
-					
-					
-						for (String nombreRanking : Ranking.keySet()) {
-							System.out.println(x+". "+nombreRanking+" con "+Ranking.get(nombreRanking)+" victorias");
-				        }
-						
-					
+					 List<Map.Entry<String, Integer>> listaEntradas = new ArrayList<>(Ranking.entrySet());				
+					 Collections.sort(listaEntradas, Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
+					 	int x=0; 
+				        for (Map.Entry<String, Integer> entry : listaEntradas) {
+				            x++;
+				        	System.out.println(x+"."+entry.getKey() + ":" + entry.getValue()+" victorias");
+				            if(x==10) {
+				            	break;
+				            }
+				        }				
 
 				} catch (ParserConfigurationException e) {
 					// TODO Auto-generated catch block

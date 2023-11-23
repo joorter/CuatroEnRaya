@@ -14,6 +14,25 @@
 		<nombre>baas</nombre>
 		<victorias>22</victorias>
 	</persona>
+	
+	<persona>
+		<nombre>baeas</nombre>
+		<victorias>212</victorias>
+	</persona>
+	<persona>
+		<nombre>bawqwas</nombre>
+		<victorias>114</victorias>
+	</persona><persona>
+		<nombre>baqdwadwas</nombre>
+		<victorias>14</victorias>
+	</persona><persona>
+		<nombre>baqwaaaaaaaas</nombre>
+		<victorias>24</victorias>
+	</persona>
+	<persona>
+		<nombre>baqwas</nombre>
+		<victorias>4</victorias>
+	</persona>
 	<persona>
 		<nombre>a</nombre>
 		<victorias>1</victorias>
@@ -24,6 +43,14 @@
 	</persona>
 	<persona>
 		<nombre>a</nombre>
+		<victorias>3</victorias>
+	</persona>
+	<persona>
+		<nombre>aa</nombre>
+		<victorias>3</victorias>
+	</persona>
+	<persona>
+		<nombre>sad</nombre>
 		<victorias>3</victorias>
 	</persona>
 </listapersonas>
