@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!ELEMENT listapersonas ( persona*)>
-<!ELEMENT persona ( nombre, victorias, logros*)*>
+<!ELEMENT listapersonas (persona*)>
+<!ELEMENT persona (nombre, victorias, logros*)>
 <!ELEMENT nombre (#PCDATA)>
 <!ELEMENT victorias (#PCDATA)>
-<!ELEMENT logros (#PCDATA)>
+<!ELEMENT logros (logro+)>
+<!ELEMENT logro (id, nombre, descripcion, completado)>
+<!ELEMENT id (#PCDATA)>
+<!ELEMENT descripcion (#PCDATA)>
+<!ELEMENT completado (#PCDATA)>

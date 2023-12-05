@@ -128,7 +128,7 @@ public class EjecutarJugador {
 					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 					DocumentBuilder db;
 					db = dbf.newDocumentBuilder();
-					Document doc = db.parse(new File("src/BD.xml"));
+					Document doc = db.parse(new File("src/Jugadores.xml"));
 					int cont = 0;
 					boolean existe = false;
 					int posicionJugadorGanador = 0;
@@ -168,7 +168,7 @@ public class EjecutarJugador {
 					DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 					DocumentBuilder db;
 					db = dbf.newDocumentBuilder();
-					Document doc = db.parse(new File("src/BD.xml"));
+					Document doc = db.parse(new File("src/Jugadores.xml"));
 					int cont = 0;
 					boolean existe = false;
 					int posicionJugadorGanador = 0;

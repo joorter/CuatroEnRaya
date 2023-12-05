@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE listapersonas SYSTEM "BD.dtd" >
+<listapersonas>
+    <persona>
+        <nombre>Mario</nombre>
+        <victorias>5</victorias>
+        <logros>
+            <logro>
+                <id>1</id>
+                <nombre>Victoria magistral</nombre>
+                <descripcion>Gana una partida</descripcion>
+                <completado>true</completado>
+            </logro>
+            <logro>
+                <id>2</id>
+                <nombre>Maestro de la victoria</nombre>
+                <descripcion>Gana 5 partidas</descripcion>
+                <completado>true</completado>
+            </logro>
+            <logro>
+                <id>3</id>
+                <nombre>La X marca el lugar</nombre>
+                <descripcion>Gana una partida utilizando fichas X</descripcion>
+                <completado>true</completado>
+            </logro>
+            <logro>
+                <id>4</id>
+                <nombre>O-mazing Victory</nombre>
+                <descripcion>Gana una partida utilizando fichas O</descripcion>
+                <completado>true</completado>
+            </logro>
+            <logro>
+            	<id>5</id>
+            	<nombre>Tablas</nombre>
+                <descripcion>Empata una partida</descripcion>
+                <completado>false</completado>
+            
+            </logro>
+        </logros>
+    </persona>
+    <persona>
+        <nombre>Josean</nombre>
+        <victorias>4</victorias>
+        <logros>
+            <logro>
+                <id>1</id>
+                <nombre>Victoria magistral</nombre>
+                <descripcion>Gana una partida</descripcion>
+                <completado>true</completado>
+            </logro>
+            <logro>
+                <id>2</id>
+                <nombre>Maestro de la victoria</nombre>
+                <descripcion>Gana 5 partidas</descripcion>
+                <completado>false</completado>
+            </logro>
+            <logro>
+                <id>3</id>
+                <nombre>La X marca el lugar</nombre>
+                <descripcion>Gana una partida utilizando fichas X</descripcion>
+                <completado>true</completado>
+            </logro>
+            <logro>
+                <id>4</id>
+                <nombre>O-mazing Victory</nombre>
+                <descripcion>Gana una partida utilizando fichas O</descripcion>
+                <completado>true</completado>
+            </logro>
+            <logro>
+            	<id>5</id>
+            	<nombre>Tablas</nombre>
+                <descripcion>Empata una partida</descripcion>
+                <completado>false</completado>
+            
+            </logro>
+        </logros>
+    </persona>
+</listapersonas>

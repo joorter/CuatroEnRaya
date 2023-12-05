@@ -96,11 +96,15 @@ public AtenderPeticion(Socket s) {
 								System.out.println("Ha ganado "+jugador);
 								int numvictorias;
 								int posicionJugadorGanador = 0;
+								
 								DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 								DocumentBuilder db = dbf.newDocumentBuilder();
 								Document doc = db.parse(new File("src/BD.xml"));
+								//Document doc = db.parse(new File("src/Jugadores.xml"));
+								
 								int cont=0;
 								boolean existe=false;
+								
 								Element raiz= doc.getDocumentElement();
 								NodeList nombres=raiz.getElementsByTagName("nombre");
 								NodeList victoriastodosganadores=raiz.getElementsByTagName("victorias");
@@ -120,19 +124,43 @@ public AtenderPeticion(Socket s) {
 									numvictorias=1;
 									
 								}
+
 								Element persona = doc.createElement("persona");
-								raiz.appendChild(persona);
-								Element nombre = doc.createElement("nombre");
-								persona.appendChild(nombre);
-								nombre.setTextContent(jugador);
-								Element victorias = doc.createElement("victorias");
-								persona.appendChild(victorias);
-								victorias.setTextContent(numvictorias+"");
-								TransformerFactory transformerFactory = TransformerFactory.newInstance();
-								Transformer transformer = transformerFactory.newTransformer();
-								DOMSource source = new DOMSource(raiz);
-								StreamResult result = new StreamResult(new File("src/BD.xml"));
-								transformer.transform(source, result);
+			                    raiz.appendChild(persona);
+			                    Element nombreElement = doc.createElement("nombre");
+			                    persona.appendChild(nombreElement);
+			                    nombreElement.setTextContent(jugador);
+			                    Element victoriasElement = doc.createElement("victorias");
+			                    persona.appendChild(victoriasElement);
+			                    victoriasElement.setTextContent(numvictorias + "");
+			                    
+			                    Element logrosElement = doc.createElement("logros");
+			                    persona.appendChild(logrosElement);
+			                    for(int i=1;i<=5;i++) {
+			                    	Element logroElement = doc.createElement("logro");
+			                    	
+			                    	Element idElement = doc.createElement("id");
+			                    	idElement.setTextContent(Integer.toString(i));
+			                    	logroElement.appendChild(idElement);
+			                    	
+			                    	Element nombreLogroElement = doc.createElement("nombre");
+			                        nombreLogroElement.setTextContent("Logro"+i);
+			                        logroElement.appendChild(nombreLogroElement);
+			                        
+			                        Element descripcionElement = doc.createElement("descripcion");
+			                        descripcionElement.setTextContent("Descripcion"+i);
+			                        logroElement.appendChild(descripcionElement);
+			                        
+			                        Element completadoElement = doc.createElement("completado");
+			                        completadoElement.setTextContent("Completado");
+			                        logroElement.appendChild(completadoElement);
+			                    }
+
+			                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			                    Transformer transformer = transformerFactory.newTransformer();
+			                    DOMSource source = new DOMSource(raiz);
+			                    StreamResult result = new StreamResult(new File("src/BD.xml"));
+			                    transformer.transform(source, result);
 							}				
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
