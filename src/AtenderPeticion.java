@@ -146,8 +146,8 @@ public AtenderPeticion(Socket s, Socket s1) {
 				        				
 				        				
 				        			}
-				        			acabado=dis.readBoolean();
-				        						 
+				        			
+				        				acabado=dis.readBoolean();		 
 				        		}
 									
 				        	}

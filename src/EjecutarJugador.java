@@ -139,6 +139,7 @@ public class EjecutarJugador {
 							int rival=dis.readInt();
 							boolean suerteprimero=dis.readBoolean();
 							Jugador contrario=new Jugador();
+							System.out.print(rival);
 							if(j.getEquiporojo()) {
 								contrario.setEquiporojo(false);
 							}
@@ -150,6 +151,10 @@ public class EjecutarJugador {
 								t.ponerFicha(j, columna);
 							}
 							t.mostrarTablero();
+							if(j.getEquiporojo()) {
+								dos.writeBoolean(t.getFinalizado());
+								dos.flush();
+							}
 							
 						}
 					}
