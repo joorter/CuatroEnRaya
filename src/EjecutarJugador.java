@@ -41,6 +41,7 @@ public class EjecutarJugador {
 		List<Logros> logros = new ArrayList<>();
 		Jugador j = new Jugador(nombre, logros);
 		int menu = 0;
+		int modojuego=0;
 		while (menu != 5) {
 
 			System.out.println("¿Que quieres hacer " + j.getNombre() + "? Introduce el numero");
@@ -60,17 +61,33 @@ public class EjecutarJugador {
 				try (Socket s = new Socket("localhost", 255);
 						DataInputStream dis = new DataInputStream(s.getInputStream());
 						DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-
+						ObjectOutputStream oosj = new ObjectOutputStream(s.getOutputStream());
 						ObjectOutputStream oos = new ObjectOutputStream(s.getOutputStream());
 						ObjectInputStream ois = new ObjectInputStream(s.getInputStream());) {
 					dos.writeBytes(j.getNombre() + "\n");
 					boolean rojo;
 					rojo = dis.readBoolean();
-					if (!rojo) {
-						j.setEquiporojo(false);
-					}
+					modojuego=0;
+					
 					if (rojo) {
 						j.setEquiporojo(true);
+						System.out.println("Por ser el primero en conectarte puedes elegir el modo de juego.");
+						System.out.println("Selecciona el numero.");
+						System.out.println("1.Normal");
+						System.out.println("2.Marcar a la vez.En caso de elegir la misma columna el primero será aleatorio");
+						
+						while((modojuego!=1) && (modojuego!=2)) {
+							modojuego=sc.nextInt();
+						}
+						System.out.println("hola");
+						dos.writeInt(modojuego);
+						
+					}else {
+						j.setEquiporojo(false);
+						
+						modojuego=dis.readInt();
+						System.out.println(modojuego);
+						
 					}
 					if (j.getEquiporojo()) {
 						System.out.println("Eres del equipo rojo, marcaras con X");
@@ -78,6 +95,11 @@ public class EjecutarJugador {
 						System.out.println("Eres del equipo amarillo, marcaras con O");
 					}
 					int empezar = dis.readInt();
+					
+					
+					
+					
+					
 					boolean turno;
 					if ((empezar == 1) && (j.getEquiporojo()) || ((empezar == 0) && (!j.getEquiporojo()))) {
 						System.out.println("Es tu turno");
@@ -89,25 +111,51 @@ public class EjecutarJugador {
 					dos.flush();
 
 					Tablero t = (Tablero) ois.readObject();
-					while (!t.getFinalizado()) {
-						t.mostrarTablero();
-						
-						if (turno) {
-							System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
-							int columna = sc.nextInt();
-							t.ponerFicha(j, columna);
-							turno = false;
-							oos.writeObject(t);
-							dos.flush();
+					if(modojuego==1) {
+						while (!t.getFinalizado()) {
+							t.mostrarTablero();
+							
+							if (turno) {
+								System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
+								int columna = sc.nextInt();
+								t.ponerFicha(j, columna);
+								turno = false;
+								oos.writeObject(t);
+								dos.flush();
 
-						} else {
-							System.out.println("Espera tu turno");
-							turno = true;
-							t = (Tablero) ois.readObject();
+							} else {
+								System.out.println("Espera tu turno");
+								turno = true;
+								t = (Tablero) ois.readObject();
+							}
 						}
 					}
+					if(modojuego==2) {
+						while (!t.getFinalizado()) {
+							
+							System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
+							int columna = sc.nextInt();
+							dos.writeInt(columna);
+							int rival=dis.readInt();
+							boolean suerteprimero=dis.readBoolean();
+							Jugador contrario=new Jugador();
+							if(j.getEquiporojo()) {
+								contrario.setEquiporojo(false);
+							}
+							if(suerteprimero) {
+								t.ponerFicha(j, columna);
+								t.ponerFicha(contrario, rival);
+							}else {
+								t.ponerFicha(contrario, rival);
+								t.ponerFicha(j, columna);
+							}
+							t.mostrarTablero();
+							
+						}
+					}
+					
 					if (turno) {
-						System.out.println("Lo siento has perdido");
+						
 					} else {
 						dos.writeChars(j.getNombre() + "\n");
 						dos.flush();

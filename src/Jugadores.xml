@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE listapersonas SYSTEM "BD.dtd" >
-<listapersonas>
+<?xml version="1.0" encoding="UTF-8"?><listapersonas>
     <persona>
         <nombre>Mario</nombre>
         <victorias>5</victorias>
@@ -75,4 +73,4 @@
             </logro>
         </logros>
     </persona>
-</listapersonas>
+<persona><nombre>a</nombre><victorias>1</victorias><logros/></persona><persona><nombre>22</nombre><victorias>1</victorias><logros/></persona><persona><nombre>a</nombre><victorias>2</victorias><logros/></persona><persona><nombre>a</nombre><victorias>3</victorias><logros/></persona><persona><nombre>b</nombre><victorias>1</victorias><logros/></persona><persona><nombre>b</nombre><victorias>2</victorias><logros/></persona><persona><nombre>a</nombre><victorias>4</victorias><logros/></persona><persona><nombre>b</nombre><victorias>3</victorias><logros/></persona><persona><nombre>b</nombre><victorias>4</victorias><logros/></persona><persona><nombre>b</nombre><victorias>5</victorias><logros/></persona><persona><nombre>a</nombre><victorias>5</victorias><logros/></persona></listapersonas>

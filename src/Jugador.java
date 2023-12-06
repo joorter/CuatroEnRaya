@@ -1,7 +1,8 @@
 import java.util.List;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Jugador {
+public class Jugador implements Serializable {
 	private String nombre;
 	private boolean Equiporojo;
 	private List<Logros> logrosJugador;
