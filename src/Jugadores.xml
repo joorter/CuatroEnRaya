@@ -7,31 +7,31 @@
         <logros>
             <logro>
                 <id>1</id>
-                <nombre>Victoria magistral</nombre>
+                <nombrelogro>Victoria magistral</nombrelogro>
                 <descripcion>Gana una partida</descripcion>
                 <completado>true</completado>
             </logro>
             <logro>
                 <id>2</id>
-                <nombre>Maestro de la victoria</nombre>
+                <nombrelogro>Maestro de la victoria</nombrelogro>
                 <descripcion>Gana 5 partidas</descripcion>
                 <completado>true</completado>
             </logro>
             <logro>
                 <id>3</id>
-                <nombre>La X marca el lugar</nombre>
+                <nombrelogro>La X marca el lugar</nombrelogro>
                 <descripcion>Gana una partida utilizando fichas X</descripcion>
                 <completado>true</completado>
             </logro>
             <logro>
                 <id>4</id>
-                <nombre>O-mazing Victory</nombre>
+                <nombrelogro>O-mazing Victory</nombrelogro>
                 <descripcion>Gana una partida utilizando fichas O</descripcion>
                 <completado>true</completado>
             </logro>
             <logro>
             	<id>5</id>
-            	<nombre>Tablas</nombre>
+            	<nombrelogro>Tablas</nombrelogro>
                 <descripcion>Empata una partida</descripcion>
                 <completado>false</completado>
             
@@ -44,31 +44,31 @@
         <logros>
             <logro>
                 <id>1</id>
-                <nombre>Victoria magistral</nombre>
+                <nombrelogro>Victoria magistral</nombrelogro>
                 <descripcion>Gana una partida</descripcion>
                 <completado>true</completado>
             </logro>
             <logro>
                 <id>2</id>
-                <nombre>Maestro de la victoria</nombre>
+                <nombrelogro>Maestro de la victoria</nombrelogro>
                 <descripcion>Gana 5 partidas</descripcion>
                 <completado>false</completado>
             </logro>
             <logro>
                 <id>3</id>
-                <nombre>La X marca el lugar</nombre>
+                <nombrelogro>La X marca el lugar</nombrelogro>
                 <descripcion>Gana una partida utilizando fichas X</descripcion>
                 <completado>true</completado>
             </logro>
             <logro>
                 <id>4</id>
-                <nombre>O-mazing Victory</nombre>
+                <nombrelogro>O-mazing Victory</nombrelogro>
                 <descripcion>Gana una partida utilizando fichas O</descripcion>
                 <completado>true</completado>
             </logro>
             <logro>
             	<id>5</id>
-            	<nombre>Tablas</nombre>
+            	<nombrelogro>Tablas</nombrelogro>
                 <descripcion>Empata una partida</descripcion>
                 <completado>false</completado>
             

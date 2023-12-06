@@ -28,26 +28,18 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class AtenderPeticion implements Runnable {
-private Socket s;
-private static int numeroconexiones;
-private boolean rojo;
-private static CountDownLatch contador=new CountDownLatch(2);
-private static Tablero t;
-private static int empieza;
+private Socket j1;
+private Socket j2;
+private CountDownLatch contador=new CountDownLatch(2);
+private Tablero t;
+private int empieza;
 
-public AtenderPeticion(Socket s) {
-	this.s=s;
+public AtenderPeticion(Socket s, Socket s1) {
+	this.j1=s;
+	this.j2=s1;
+	Random r=new Random();
+	empieza=r.nextInt(2);
 	
-	numeroconexiones++;
-	
-	if(numeroconexiones%2==1) {
-		rojo=true;
-		t=new Tablero();
-		Random random = new Random();
-         this.empieza = random.nextInt(2);
-	}else {
-		rojo=false;
-	}
 }
 	@Override
 	public void run() {
@@ -56,44 +48,64 @@ public AtenderPeticion(Socket s) {
 			
 			try {
 				t=new Tablero();
-				System.out.println("Participante encontrado");
+				System.out.println("Empieza la partida");
 				
-				contador.countDown();
-				contador.await();
-				try(DataInputStream dis=new DataInputStream(s.getInputStream());
-						DataOutputStream dos=new DataOutputStream(s.getOutputStream());
-						ObjectInputStream ois=new ObjectInputStream(s.getInputStream());
-						ObjectOutputStream oos=new ObjectOutputStream(s.getOutputStream());
+				
+				try(DataInputStream dis=new DataInputStream(j1.getInputStream());
+						DataOutputStream dos=new DataOutputStream(j1.getOutputStream());
+						ObjectInputStream ois=new ObjectInputStream(j1.getInputStream());
+						ObjectOutputStream oos=new ObjectOutputStream(j1.getOutputStream());
+						DataInputStream dis2=new DataInputStream(j2.getInputStream());
+						DataOutputStream dos2=new DataOutputStream(j2.getOutputStream());
+						ObjectInputStream ois2=new ObjectInputStream(j2.getInputStream());
+						ObjectOutputStream oos2=new ObjectOutputStream(j2.getOutputStream());
 						) {
-						String jugador=dis.readLine();
-						dos.writeBoolean(rojo);
-				        dos.writeInt(AtenderPeticion.empieza);		
+						String jugador1=dis.readLine();
+						String jugador2=dis2.readLine();
+						dos.writeBoolean(true);
+						dos2.writeBoolean(false);
+				        dos.writeInt(empieza);	
+				        dos2.writeInt(empieza);
 				        	oos.writeObject(t);
+				        	oos2.writeObject(t);
 							boolean turno=false;
 							contador =new CountDownLatch(2);
 							while(!t.getFinalizado()) {
 								
-								turno=dis.readBoolean();
+								
 								if(turno) {
+									
 									t=(Tablero)ois.readObject();
 									t.mostrarTablero();
-								}
-								contador.countDown();
-								contador.await();
-								if(!turno) {
-									oos.writeObject(t);
-									dos.flush();
-									
+									oos2.writeObject(t);
+									oos2.flush();
+									oos2.reset();
+									turno=false;
+
 								}else {
-									contador = new CountDownLatch(2);
+									
+									t=(Tablero)ois2.readObject();
+									t.mostrarTablero();
+									oos.writeObject(t);
+									oos.flush();
+									oos.reset();
+									turno=true;
 								}
+									
+								
 								System.out.println("fin de turno");
-								
-								
 							}
-							if(turno) {
 								
-								System.out.println("Ha ganado "+jugador);
+							String ganador=null;
+							if(!turno) {
+								System.out.println("Ha ganado "+jugador1);
+								ganador=jugador1;
+							}else {
+								System.out.println("Ha ganado "+jugador2);
+								ganador=jugador2;
+							}
+								
+								
 								int numvictorias;
 								int posicionJugadorGanador = 0;
 								
@@ -110,8 +122,8 @@ public AtenderPeticion(Socket s) {
 								NodeList victoriastodosganadores=raiz.getElementsByTagName("victorias");
 								while(cont<nombres.getLength()){
 									System.out.println(nombres.item(cont).getTextContent());
-									System.out.println(jugador);
-									if(nombres.item(cont).getTextContent().equals(jugador)) {
+									System.out.println(ganador);
+									if(nombres.item(cont).getTextContent().equals(ganador)) {
 										existe=true;
 										posicionJugadorGanador=cont;
 									}
@@ -129,7 +141,7 @@ public AtenderPeticion(Socket s) {
 			                    raiz.appendChild(persona);
 			                    Element nombreElement = doc.createElement("nombre");
 			                    persona.appendChild(nombreElement);
-			                    nombreElement.setTextContent(jugador);
+			                    nombreElement.setTextContent(ganador);
 			                    Element victoriasElement = doc.createElement("victorias");
 			                    persona.appendChild(victoriasElement);
 			                    victoriasElement.setTextContent(numvictorias + "");
@@ -177,13 +189,7 @@ public AtenderPeticion(Socket s) {
 				} catch (TransformerException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			 catch (IOException e) {
+				} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

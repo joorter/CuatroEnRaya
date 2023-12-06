@@ -4,7 +4,8 @@
 <!ELEMENT nombre (#PCDATA)>
 <!ELEMENT victorias (#PCDATA)>
 <!ELEMENT logros (logro+)>
-<!ELEMENT logro (id, nombre, descripcion, completado)>
+<!ELEMENT logro (id, nombrelogro, descripcion, completado)>
 <!ELEMENT id (#PCDATA)>
+<!ELEMENT nombrelogro (#PCDATA)>
 <!ELEMENT descripcion (#PCDATA)>
 <!ELEMENT completado (#PCDATA)>

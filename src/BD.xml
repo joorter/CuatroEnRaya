@@ -25,4 +25,4 @@
 		<nombre>a</nombre>
 		<victorias>3</victorias>
 	</persona>
-<persona><nombre>Mario1</nombre><victorias>1</victorias><logros/></persona><persona><nombre>Mario</nombre><victorias>1</victorias><logros/></persona></listapersonas>
+<persona><nombre>Mario1</nombre><victorias>1</victorias><logros/></persona><persona><nombre>Mario</nombre><victorias>1</victorias><logros/></persona><persona><nombre>a</nombre><victorias>4</victorias><logros/></persona><persona><nombre>a</nombre><victorias>5</victorias><logros/></persona></listapersonas>

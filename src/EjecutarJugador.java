@@ -69,6 +69,9 @@ public class EjecutarJugador {
 					if (!rojo) {
 						j.setEquiporojo(false);
 					}
+					if (rojo) {
+						j.setEquiporojo(true);
+					}
 					if (j.getEquiporojo()) {
 						System.out.println("Eres del equipo rojo, marcaras con X");
 					} else {
@@ -88,7 +91,7 @@ public class EjecutarJugador {
 					Tablero t = (Tablero) ois.readObject();
 					while (!t.getFinalizado()) {
 						t.mostrarTablero();
-						dos.writeBoolean(turno);
+						
 						if (turno) {
 							System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
 							int columna = sc.nextInt();
@@ -110,8 +113,6 @@ public class EjecutarJugador {
 						dos.flush();
 					}
 					t.mostrarTablero();
-					oos.close();
-					ois.close();
 
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
