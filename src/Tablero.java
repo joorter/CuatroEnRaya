@@ -84,7 +84,7 @@ public class Tablero implements Serializable {
 			finalizado=true;
 			
 			if(!j.haCompletadoLogro("Primera victoria")) {
-				j.actualizarLogro("Primera victoria");
+				j.completarLogro("Primera victoria");
 			}
 			
 		}

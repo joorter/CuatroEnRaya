@@ -38,29 +38,24 @@ public class Jugador implements Serializable {
 		return this.Equiporojo;		
 	}
 	
-	public void actualizarLogro(String nombreLogro) {
+	public void completarLogro(String nombreLogro) {
 		for(Logros logro : logrosJugador) {
 			if(logro.getNombre().equals(nombreLogro)) {
-				logro.actualizarProgreso();		
-				if(logro.logroCompleto()) {
-					System.out.println("Logro desbloqueado: "+ logro.getNombre());
-				}
+				logro.setCompletado(true);
 			}
 		}
 	}
 	
-	
-	
 	public List<Logros> consultarLogros(){
 		for(Logros logro: logrosJugador) {
-			System.out.println(logro.getNombre() +": " + logro.getDescripcion()+ "("+ logro.getProgresoActual()+"/"+logro.getProgresoComplet()+")");
+			System.out.println("ID logro: "+logro.getId()+" "+logro.getNombre() +": " + logro.getDescripcion()+ "("+logro.getCompletado()+")");
 		}
 		return logrosJugador;
 	}
 	
 	public boolean haCompletadoLogro(String nombreLogro) {
 		for(Logros logro: logrosJugador) {
-			if(logro.getNombre().equals(nombreLogro)&&logro.logroCompleto()) {
+			if(logro.getNombre().equals(nombreLogro)&&logro.getCompletado()) {
 				return true;
 			}
 		}

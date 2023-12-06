@@ -6,8 +6,8 @@ public class prueba {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Logros logro1 = new Logros("Primera victoria", "Gana una partida",1);
-		Logros logro2 = new Logros("Segunda victoria", "Gana dos partidas",2);
+		Logros logro1 = new Logros(1,"Primera victoria", "Gana una partida",false);
+		Logros logro2 = new Logros(1,"Segunda victoria", "Gana dos partidas",false);
 		
 		List<Logros> logrosJugador = new ArrayList<>();
 		logrosJugador.add(logro1);
