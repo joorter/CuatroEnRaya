@@ -48,7 +48,7 @@ public class AtenderPeticion implements Runnable {
 
 		try {
 			t = new Tablero();
-			System.out.println("Empieza la partida");
+			
 
 			try (DataInputStream dis = new DataInputStream(j1.getInputStream());
 					DataOutputStream dos = new DataOutputStream(j1.getOutputStream());
@@ -66,12 +66,13 @@ public class AtenderPeticion implements Runnable {
 				dos.writeBoolean(true);
 				dos2.writeBoolean(false);
 				int modojuego = dis.readInt();
-				System.out.println(modojuego);
+				System.out.println("Empieza la partida entre "+jugador1 + " y "+jugador2);
+				System.out.println("Se he seleccionado el modo de juego nº"+modojuego);
 				dos2.writeInt(modojuego);
 				dos.flush();
-				System.out.println("LLega aqui");
 				dos.writeInt(empieza);
 				dos2.writeInt(empieza);
+				
 				oos.writeObject(t);
 				oos2.writeObject(t);
 				boolean turno = false;
@@ -100,8 +101,7 @@ public class AtenderPeticion implements Runnable {
 							oos.reset();
 							turno = true;
 						}
-
-						System.out.println("fin de turno");
+						System.out.println("Ha acabado el turno del jugador ");
 					}
 
 					if (!turno) {
@@ -161,6 +161,50 @@ public class AtenderPeticion implements Runnable {
 						ganador = jugador2;
 					} else {
 						ganador = "Empate";
+					}
+				}
+
+				if (modojuego == 3) {
+
+					Random random = new Random();
+					int numFila = random.nextInt(6);
+					int numColumna = random.nextInt(7);
+					t.insertarBarrera(numFila, numColumna);
+					dos.writeInt(numFila);
+					dos.writeInt(numColumna);
+					dos2.writeInt(numFila);
+					dos2.writeInt(numColumna);
+
+					while (!t.getFinalizado()) {
+
+						if (turno) {
+
+							t = (Tablero) ois.readObject();
+							t.mostrarTablero();
+							oos2.writeObject(t);
+							oos2.flush();
+							oos2.reset();
+							turno = false;
+
+						} else {
+
+							t = (Tablero) ois2.readObject();
+							t.mostrarTablero();
+							oos.writeObject(t);
+							oos.flush();
+							oos.reset();
+							turno = true;
+						}
+
+						System.out.println("fin de turno");
+					}
+
+					if (!turno) {
+						System.out.println("Ha ganado " + jugador1);
+						ganador = jugador1;
+					} else {
+						System.out.println("Ha ganado " + jugador2);
+						ganador = jugador2;
 					}
 				}
 				System.out.println(ganador);

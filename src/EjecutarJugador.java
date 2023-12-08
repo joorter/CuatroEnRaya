@@ -41,17 +41,20 @@ public class EjecutarJugador {
 		List<Logros> logros = new ArrayList<>();
 		Jugador j = new Jugador(nombre, logros);
 		int menu = 0;
-		int modojuego=0;
+		int modojuego = 0;
 		while (menu != 5) {
 
-			System.out.println("¿Que quieres hacer " + j.getNombre() + "? Introduce el numero");
-			System.out.println("1.Cambiar nombre");
-			System.out.println("2.Jugar");
-			System.out.println("3.Numero victorias con el nombre " + j.getNombre());
+			System.out.println("¿Que quieres hacer " + j.getNombre() + "? Introduce la opción que desees.");
+			System.out.println("1. Cambiar nombre");
+			System.out.println("2. Jugar");
+			System.out.println("3. Numero victorias con el nombre " + j.getNombre());
 			System.out.println("4. Ranking");
-			System.out.println("5.Salir");
-
+			System.out.println("5. Salir");
+			
 			menu = sc.nextInt();
+			if((menu>0)&&(menu<=5)) {
+				System.out.println("Esperando a otro jugador...");
+			}
 			if (menu == 1) {
 				System.out.println("Introduce el nombre");
 				nombre = sc.next();
@@ -66,28 +69,31 @@ public class EjecutarJugador {
 						ObjectInputStream ois = new ObjectInputStream(s.getInputStream());) {
 					dos.writeBytes(j.getNombre() + "\n");
 					boolean rojo;
-					rojo = dis.readBoolean();
-					modojuego=0;
 					
+					rojo = dis.readBoolean();
+					System.out.println("¡Jugador encontrado!");
+					modojuego = 0;
+
 					if (rojo) {
 						j.setEquiporojo(true);
-						System.out.println("Por ser el primero en conectarte puedes elegir el modo de juego.");
-						System.out.println("Selecciona el numero.");
-						System.out.println("1.Normal");
-						System.out.println("2.Marcar a la vez.En caso de elegir la misma columna el primero será aleatorio");
-						
-						while((modojuego!=1) && (modojuego!=2)) {
-							modojuego=sc.nextInt();
+						System.out.println("Al ser el host de la partida, eligirás el modo de juego.");
+						System.out.println("Selecciona el modo de juego que desees jugar.");
+						System.out.println("1. Partida normal");
+						System.out.println(
+								"2. Indicar columna a la vez. En caso de elegir la misma columna, el primero en poner será aleatorio");
+						System.out.println("3. Con una barrera.");
+						while ((modojuego != 1) && (modojuego != 2) && (modojuego != 3)) {
+							modojuego = sc.nextInt();
 						}
-						System.out.println("hola");
 						dos.writeInt(modojuego);
-						
-					}else {
+
+					} else {
+						System.out.println("Espera... El otro jugador está seleccionando el modo de juego.");
 						j.setEquiporojo(false);
-						
-						modojuego=dis.readInt();
+
+						modojuego = dis.readInt();
 						System.out.println(modojuego);
-						
+
 					}
 					if (j.getEquiporojo()) {
 						System.out.println("Eres del equipo rojo, marcaras con X");
@@ -95,11 +101,7 @@ public class EjecutarJugador {
 						System.out.println("Eres del equipo amarillo, marcaras con O");
 					}
 					int empezar = dis.readInt();
-					
-					
-					
-					
-					
+
 					boolean turno;
 					if ((empezar == 1) && (j.getEquiporojo()) || ((empezar == 0) && (!j.getEquiporojo()))) {
 						System.out.println("Es tu turno");
@@ -111,10 +113,11 @@ public class EjecutarJugador {
 					dos.flush();
 
 					Tablero t = (Tablero) ois.readObject();
-					if(modojuego==1) {
+
+					if (modojuego == 1) {
 						while (!t.getFinalizado()) {
 							t.mostrarTablero();
-							
+
 							if (turno) {
 								System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
 								int columna = sc.nextInt();
@@ -130,54 +133,79 @@ public class EjecutarJugador {
 							}
 						}
 					}
-					if(modojuego==2) {
-						int columna=0;
+					if (modojuego == 2) {
+						int columna = 0;
 						while (!t.getFinalizado()) {
-							
+
 							System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
-							 columna = sc.nextInt();
+							columna = sc.nextInt();
 							dos.writeInt(columna);
-							int rival=dis.readInt();
-							boolean suerteprimero=dis.readBoolean();
-							Jugador contrario=new Jugador();
+							int rival = dis.readInt();
+							boolean suerteprimero = dis.readBoolean();
+							Jugador contrario = new Jugador();
 							System.out.print(rival);
-							if(j.getEquiporojo()) {
+							if (j.getEquiporojo()) {
 								contrario.setEquiporojo(false);
 							}
-							if(suerteprimero) {
+							if (suerteprimero) {
 								t.ponerFicha(j, columna);
 								t.ponerFicha(contrario, rival);
-							}else {
+							} else {
 								t.ponerFicha(contrario, rival);
 								t.ponerFicha(j, columna);
 							}
 							t.mostrarTablero();
-							if(j.getEquiporojo()) {
+							if (j.getEquiporojo()) {
 								dos.writeBoolean(t.getFinalizado());
 								dos.flush();
 							}
-							
+
 						}
-						boolean ganador=false;
-						if(j.getEquiporojo()) {
-							for(int i=0;i<6;i++) {
-								if(t.jugadorGana(i, columna-1, 1)) {
-									ganador=true;
+						boolean ganador = false;
+						if (j.getEquiporojo()) {
+							for (int i = 0; i < 6; i++) {
+								if (t.jugadorGana(i, columna - 1, 1)) {
+									ganador = true;
 								}
 							}
-						}else {
-							for(int i=0;i<6;i++) {
-								if(t.jugadorGana(i, columna-1, 2)) {
-									ganador=true;
+						} else {
+							for (int i = 0; i < 6; i++) {
+								if (t.jugadorGana(i, columna - 1, 2)) {
+									ganador = true;
 								}
 							}
 						}
 						dos.writeBoolean(ganador);
-						
+
 					}
-					
+
+					if (modojuego == 3) {
+
+						int numFila = dis.readInt();
+						int numColumnas = dis.readInt();
+						t.insertarBarrera(numFila, numColumnas);
+
+						while (!t.getFinalizado()) {
+
+							if (turno) {
+								t.mostrarTablero();
+								System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
+								int columna = sc.nextInt();
+								t.ponerFicha(j, columna);
+								turno = false;
+								oos.writeObject(t);
+								dos.flush();
+
+							} else {
+								System.out.println("Espera tu turno");
+								turno = true;
+								t = (Tablero) ois.readObject();
+							}
+						}
+					}
+
 					if (turno) {
-						
+
 					} else {
 						dos.writeChars(j.getNombre() + "\n");
 						dos.flush();
@@ -257,16 +285,17 @@ public class EjecutarJugador {
 						}
 						cont++;
 					}
-					 List<Map.Entry<String, Integer>> listaEntradas = new ArrayList<>(Ranking.entrySet());				
-					 Collections.sort(listaEntradas, Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
-					 	int x=0; 
-				        for (Map.Entry<String, Integer> entry : listaEntradas) {
-				            x++;
-				        	System.out.println(x+"."+entry.getKey() + ":" + entry.getValue()+" victorias");
-				            if(x==10) {
-				            	break;
-				            }
-				        }				
+					List<Map.Entry<String, Integer>> listaEntradas = new ArrayList<>(Ranking.entrySet());
+					Collections.sort(listaEntradas,
+							Comparator.comparing(Map.Entry::getValue, Comparator.reverseOrder()));
+					int x = 0;
+					for (Map.Entry<String, Integer> entry : listaEntradas) {
+						x++;
+						System.out.println(x + "." + entry.getKey() + ":" + entry.getValue() + " victorias");
+						if (x == 10) {
+							break;
+						}
+					}
 
 				} catch (ParserConfigurationException e) {
 					// TODO Auto-generated catch block
