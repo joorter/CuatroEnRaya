@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<listapersonas>
+<?xml version="1.0" encoding="UTF-8"?><listapersonas>
     <persona>
         <nombre>Mario</nombre>
         <victorias>5</victorias>
@@ -74,4 +73,4 @@
             </logro>
         </logros>
     </persona>
-</listapersonas>
+<persona><nombre/><victorias>1</victorias><logros/></persona><persona><nombre>Empate</nombre><victorias>1</victorias><logros/></persona><persona><nombre>AA</nombre><victorias>1</victorias><logros/></persona><persona><nombre>BB</nombre><victorias>1</victorias><logros/></persona></listapersonas>

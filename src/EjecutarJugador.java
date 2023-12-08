@@ -131,10 +131,11 @@ public class EjecutarJugador {
 						}
 					}
 					if(modojuego==2) {
+						int columna=0;
 						while (!t.getFinalizado()) {
 							
 							System.out.println("Indica el numero de columna del 1 al 7 para añadir tu ficha ");
-							int columna = sc.nextInt();
+							 columna = sc.nextInt();
 							dos.writeInt(columna);
 							int rival=dis.readInt();
 							boolean suerteprimero=dis.readBoolean();
@@ -157,6 +158,22 @@ public class EjecutarJugador {
 							}
 							
 						}
+						boolean ganador=false;
+						if(j.getEquiporojo()) {
+							for(int i=0;i<6;i++) {
+								if(t.jugadorGana(i, columna-1, 1)) {
+									ganador=true;
+								}
+							}
+						}else {
+							for(int i=0;i<6;i++) {
+								if(t.jugadorGana(i, columna-1, 2)) {
+									ganador=true;
+								}
+							}
+						}
+						dos.writeBoolean(ganador);
+						
 					}
 					
 					if (turno) {
