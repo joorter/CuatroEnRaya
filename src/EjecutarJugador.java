@@ -143,7 +143,7 @@ public class EjecutarJugador {
 							int rival = dis.readInt();
 							boolean suerteprimero = dis.readBoolean();
 							Jugador contrario = new Jugador();
-							System.out.print(rival);
+							
 							if (j.getEquiporojo()) {
 								contrario.setEquiporojo(false);
 							}
